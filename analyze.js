@@ -15,6 +15,7 @@ const fetchChatAnalysis = () => {
 
 const groupTimestampsByPerson = (contentArr) => {
     let chatTimesByPerson = {};
+    let wordCountByPerson = {};
     contentArr.map((line) => {
     let timeString = line.substr(0, line.indexOf('-')).trim();
     let timeStamp = dayjs(timeString, 'DD/MM/YY, h:mm a');
@@ -22,17 +23,22 @@ const groupTimestampsByPerson = (contentArr) => {
     
     if (timeStamp.isValid()) {
         let name = line.substr(0, line.indexOf(':')).trim(); 
+        let msg = line.substring(line.indexOf(':')+1);
         let month = timeStamp.format('MMM YYYY');
         if ( !chatTimesByPerson[month] ) {
             chatTimesByPerson[month] = {};
+            wordCountByPerson[month] = {};
         }
         if ( !chatTimesByPerson[month] [name]) {
             chatTimesByPerson[month] [name] = 0;
+            wordCountByPerson[month][name] = 0;
         }
         chatTimesByPerson[month] [name] += 1;
+        wordCountByPerson[month][name] += msg.split(' ').length;
     }
     });
     console.log(chatTimesByPerson);
+    console.log(wordCountByPerson);
     return chatTimesByPerson;
 };
 
