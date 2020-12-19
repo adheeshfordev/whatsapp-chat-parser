@@ -1,0 +1,15 @@
+{
+  "name": "chat-analysis",
+  "version": "1.0.0",
+  "description": "Analyzes chats and throws up stats",
+  "main": "analyze.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adheesh Lekha Prabhakaran",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "dayjs": "^1.9.7"
+  }
+}
