@@ -1,24 +1,24 @@
-const fs = require("fs");
-const canvas = require("canvas");
-const dayjs = require("dayjs");
-const config = require("../config/common");
+const fs = require('fs');
+const canvas = require('canvas');
+const dayjs = require('dayjs');
+const config = require('../config/common');
 
 const groupChatsByPerson = (contentArr) => {
-  let chatByPerson = {};
-  let prevName = "";
+  const chatByPerson = {};
+  let prevName = '';
   contentArr.map((line) => {
-    let timeString = line.substr(0, line.indexOf("-")).trim();
-    let hasTimeStampPrefix = dayjs(timeString, "DD/MM/YY, h:mm a").isValid();
-    line = line.substring(line.indexOf("-") + 1);
-    let name = line.substr(0, line.indexOf(":")).trim();
+    const timeString = line.substr(0, line.indexOf('-')).trim();
+    const hasTimeStampPrefix = dayjs(timeString, 'DD/MM/YY, h:mm a').isValid();
+    line = line.substring(line.indexOf('-') + 1);
+    let name = line.substr(0, line.indexOf(':')).trim();
     if (!name || !hasTimeStampPrefix) {
       name = prevName;
     }
-    if (!line.toUpperCase().includes("<MEDIA")) {
+    if (!line.toUpperCase().includes('<MEDIA')) {
       if (!chatByPerson[name]) {
-        chatByPerson[name] = [line.substring(line.indexOf(":") + 1)];
+        chatByPerson[name] = [line.substring(line.indexOf(':') + 1)];
       } else {
-        chatByPerson[name].push(line.substring(line.indexOf(":") + 1));
+        chatByPerson[name].push(line.substring(line.indexOf(':') + 1));
       }
     }
     prevName = name;
@@ -27,17 +27,17 @@ const groupChatsByPerson = (contentArr) => {
 };
 
 const countWordOccurrences = (chatByPerson) => {
-  let wordOccurrences = {};
+  const wordOccurrences = {};
   for (const person in chatByPerson) {
     wordOccurrences[person] = {};
-    let lineArray = chatByPerson[person];
+    const lineArray = chatByPerson[person];
     lineArray.map((line) => {
-      var wordArray = line
-        .replace(/\./g, " ")
-        .replace(/\,/g, " ")
-        .replace(/\!/g, " ")
-        .replace(/\?/g, " ")
-        .split(" ");
+      const wordArray = line
+          .replace(/\./g, ' ')
+          .replace(/\,/g, ' ')
+          .replace(/\!/g, ' ')
+          .replace(/\?/g, ' ')
+          .split(' ');
 
       wordArray.map((word) => {
         word = word.toUpperCase();
@@ -60,43 +60,43 @@ const countWordOccurrences = (chatByPerson) => {
 };
 
 const sortByOccurrence = (wordOccurrences) => {
-  let finalWordCount = {};
+  const finalWordCount = {};
   for (const person in wordOccurrences) {
-    let sortedWordList = {};
-    let wordList = wordOccurrences[person];
-    let sortedWordKeyList = Object.keys(wordList);
+    const sortedWordList = {};
+    const wordList = wordOccurrences[person];
+    const sortedWordKeyList = Object.keys(wordList);
     sortedWordKeyList
-      .sort((a, b) => {
-        return wordList[b] - wordList[a];
-      })
-      .map((word) => {
-        sortedWordList[word] = wordList[word];
-      });
+        .sort((a, b) => {
+          return wordList[b] - wordList[a];
+        })
+        .map((word) => {
+          sortedWordList[word] = wordList[word];
+        });
     finalWordCount[person] = sortedWordList;
   }
   return finalWordCount;
 };
 
 const createWordCloud = (wordCount) => {
-  let customColors = {};
-  let width = 4000;
-  let height = 3000;
+  const customColors = {};
+  const width = 4000;
+  const height = 3000;
   const wordCanvas = canvas.createCanvas(width, height);
-  const context = wordCanvas.getContext("2d");
+  const context = wordCanvas.getContext('2d');
   context.globalAlpha = 0.9;
 
-  context.fillStyle = "#fff";
+  context.fillStyle = '#fff';
   context.fillRect(0, 0, width, height);
   let count = 0;
-  for (let person in wordCount) {
+  for (const person in wordCount) {
     let personalColor = config.colorArray[count];
 
     if (customColors[person]) {
       personalColor = customColors[person];
     }
 
-    for (let word in wordCount[person]) {
-      let fontSize = wordCount[person][word] / 10;
+    for (const word in wordCount[person]) {
+      const fontSize = wordCount[person][word] / 10;
       context.font = `bold ${fontSize}px Menlo`;
       context.fillStyle = personalColor;
       const x = Math.random() * 3600 + 200;
@@ -105,8 +105,8 @@ const createWordCloud = (wordCount) => {
     }
     count++;
   }
-  const buffer = wordCanvas.toBuffer("image/png");
-  fs.writeFileSync("./image.png", buffer);
+  const buffer = wordCanvas.toBuffer('image/png');
+  fs.writeFileSync('./image.png', buffer);
 };
 
 const generateWordCloud = (contentArr) => {
