@@ -23,7 +23,7 @@ const colorArray = [
 ];
 
 // let forbiddenWords = ['I', 'THE', 'TO', 'AND', 'FOR', 'WILL', 'CAN', 'OKAY'];
-const forbiddenWords = [];
+const forbiddenWords: string[] = [];
 
 const _colorArray = colorArray;
 export { _colorArray as colorArray };

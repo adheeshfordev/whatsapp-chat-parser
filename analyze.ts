@@ -8,15 +8,15 @@ import { generateWordCloud } from './util/wordCloud';
 
 const fetchChatAnalysis = () => {
   const content = readFileSync(process.argv[2]).toString();
-  const contentArr = content.split('\n');
+  const contentArr: string[] = content.split('\n');
   const timestampsByPerson = groupTimestampsByPerson(contentArr);
   generateWordCloud(contentArr);
 };
 
-const groupTimestampsByPerson = (contentArr) => {
-  const chatTimesByPerson = {};
-  const wordCountByPerson = {};
-  contentArr.map((line) => {
+const groupTimestampsByPerson = (contentArr: string[]) => {
+  const chatTimesByPerson: { [key: string]: any } = {};
+  const wordCountByPerson: { [key: string]: any } = {};
+  contentArr.map((line: string) => {
     const timeString = line.substr(0, line.indexOf('-')).trim();
     const timeStamp = dayjs(timeString, 'DD/MM/YY, h:mm a');
     line = line.substring(line.indexOf('-') + 1);

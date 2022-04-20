@@ -4,8 +4,8 @@ import { createCanvas } from 'canvas';
 import dayjs from 'dayjs';
 import { forbiddenWords, colorArray } from '../config/common';
 
-const groupChatsByPerson = (contentArr) => {
-  const chatByPerson = {};
+const groupChatsByPerson = (contentArr: string[]) => {
+  const chatByPerson: { [key: string]: any } = {};
   let prevName = '';
   contentArr.map((line) => {
     const timeString = line.substr(0, line.indexOf('-')).trim();
@@ -27,12 +27,12 @@ const groupChatsByPerson = (contentArr) => {
   return chatByPerson;
 };
 
-const countWordOccurrences = (chatByPerson) => {
-  const wordOccurrences = {};
+const countWordOccurrences = (chatByPerson: { [key: string]: any }) => {
+  const wordOccurrences: { [key: string]: any } = {};
   for (const person in chatByPerson) {
     wordOccurrences[person] = {};
     const lineArray = chatByPerson[person];
-    lineArray.map((line) => {
+    lineArray.map((line: string) => {
       const wordArray = line
           .replace(/\./g, ' ')
           .replace(/\,/g, ' ')
@@ -40,7 +40,7 @@ const countWordOccurrences = (chatByPerson) => {
           .replace(/\?/g, ' ')
           .split(' ');
 
-      wordArray.map((word) => {
+      wordArray.map((word: string) => {
         word = word.toUpperCase();
         if (
           word &&
@@ -60,10 +60,10 @@ const countWordOccurrences = (chatByPerson) => {
   return wordOccurrences;
 };
 
-const sortByOccurrence = (wordOccurrences) => {
-  const finalWordCount = {};
+const sortByOccurrence = (wordOccurrences: { [key: string]: any }) => {
+  const finalWordCount: { [key: string]: any } = {};
   for (const person in wordOccurrences) {
-    const sortedWordList = {};
+    const sortedWordList: { [key: string]: any } = {};
     const wordList = wordOccurrences[person];
     const sortedWordKeyList = Object.keys(wordList);
     sortedWordKeyList
@@ -78,8 +78,8 @@ const sortByOccurrence = (wordOccurrences) => {
   return finalWordCount;
 };
 
-const createWordCloud = (wordCount) => {
-  const customColors = {};
+const createWordCloud = (wordCount: { [key: string]: any }) => {
+  const customColors: { [key: string]: any } = {};
   const width = 4000;
   const height = 3000;
   const wordCanvas = createCanvas(width, height);
@@ -110,7 +110,7 @@ const createWordCloud = (wordCount) => {
   writeFileSync('./image.png', buffer);
 };
 
-const generateWordCloud = (contentArr) => {
+const generateWordCloud = (contentArr: Array<any>) => {
   const chatByPerson = groupChatsByPerson(contentArr);
   const wordOccurrences = countWordOccurrences(chatByPerson);
   const finalWordCount = sortByOccurrence(wordOccurrences);
