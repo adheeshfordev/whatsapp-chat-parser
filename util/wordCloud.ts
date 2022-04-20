@@ -1,5 +1,5 @@
 //@ts-check
-import { writeFileSync } from 'fs';
+import  * as fs from 'fs';
 import { createCanvas } from 'canvas';
 import dayjs from 'dayjs';
 import { forbiddenWords, colorArray } from '../config/common';
@@ -107,7 +107,7 @@ const createWordCloud = (wordCount: { [key: string]: any }) => {
     count++;
   }
   const buffer = wordCanvas.toBuffer('image/png');
-  writeFileSync('./image.png', buffer);
+  fs.writeFileSync('./image.png', buffer);
 };
 
 const generateWordCloud = (contentArr: Array<any>) => {

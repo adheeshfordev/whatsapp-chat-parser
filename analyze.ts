@@ -1,5 +1,5 @@
 //@ts-check
-import { readFileSync } from 'fs';
+import * as fs from 'fs';
 import dayjs, { extend } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 extend(customParseFormat);
@@ -7,7 +7,7 @@ extend(customParseFormat);
 import { generateWordCloud } from './util/wordCloud';
 
 const fetchChatAnalysis = () => {
-  const content = readFileSync(process.argv[2]).toString();
+  const content = fs.readFileSync(process.argv[2]).toString();
   const contentArr: string[] = content.split('\n');
   const timestampsByPerson = groupTimestampsByPerson(contentArr);
   generateWordCloud(contentArr);
