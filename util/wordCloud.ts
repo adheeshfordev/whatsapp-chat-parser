@@ -1,7 +1,8 @@
-const fs = require('fs');
-const canvas = require('canvas');
-const dayjs = require('dayjs');
-const config = require('../config/common');
+//@ts-check
+import { writeFileSync } from 'fs';
+import { createCanvas } from 'canvas';
+import dayjs from 'dayjs';
+import { forbiddenWords, colorArray } from '../config/common';
 
 const groupChatsByPerson = (contentArr) => {
   const chatByPerson = {};
@@ -45,7 +46,7 @@ const countWordOccurrences = (chatByPerson) => {
           word &&
           isNaN(parseInt(word)) &&
           wordOccurrences[person] &&
-          !config.forbiddenWords.includes(word)
+          !forbiddenWords.includes(word)
         ) {
           if (wordOccurrences[person][word]) {
             wordOccurrences[person][word] += 1;
@@ -81,7 +82,7 @@ const createWordCloud = (wordCount) => {
   const customColors = {};
   const width = 4000;
   const height = 3000;
-  const wordCanvas = canvas.createCanvas(width, height);
+  const wordCanvas = createCanvas(width, height);
   const context = wordCanvas.getContext('2d');
   context.globalAlpha = 0.9;
 
@@ -89,7 +90,7 @@ const createWordCloud = (wordCount) => {
   context.fillRect(0, 0, width, height);
   let count = 0;
   for (const person in wordCount) {
-    let personalColor = config.colorArray[count];
+    let personalColor = colorArray[count];
 
     if (customColors[person]) {
       personalColor = customColors[person];
@@ -106,7 +107,7 @@ const createWordCloud = (wordCount) => {
     count++;
   }
   const buffer = wordCanvas.toBuffer('image/png');
-  fs.writeFileSync('./image.png', buffer);
+  writeFileSync('./image.png', buffer);
 };
 
 const generateWordCloud = (contentArr) => {
@@ -116,4 +117,5 @@ const generateWordCloud = (contentArr) => {
   createWordCloud(finalWordCount);
 };
 
-exports.generateWordCloud = generateWordCloud;
+const _generateWordCloud = generateWordCloud;
+export { _generateWordCloud as generateWordCloud };

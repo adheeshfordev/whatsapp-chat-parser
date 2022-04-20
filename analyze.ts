@@ -1,16 +1,16 @@
-const fs = require('fs');
-const dayjs = require('dayjs');
-const customParseFormat = require('dayjs/plugin/customParseFormat');
-dayjs.extend(customParseFormat);
+//@ts-check
+import { readFileSync } from 'fs';
+import dayjs, { extend } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+extend(customParseFormat);
 
-const wordCloud = require('./util/wordCloud');
-const config = require('./config/common');
+import { generateWordCloud } from './util/wordCloud';
 
 const fetchChatAnalysis = () => {
-  const content = fs.readFileSync(process.argv[2]).toString();
+  const content = readFileSync(process.argv[2]).toString();
   const contentArr = content.split('\n');
   const timestampsByPerson = groupTimestampsByPerson(contentArr);
-  wordCloud.generateWordCloud(contentArr);
+  generateWordCloud(contentArr);
 };
 
 const groupTimestampsByPerson = (contentArr) => {
