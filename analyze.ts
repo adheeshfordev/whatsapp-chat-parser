@@ -14,8 +14,8 @@ const fetchChatAnalysis = () => {
 };
 
 const groupTimestampsByPerson = (contentArr: string[]) => {
-  const chatTimesByPerson: { [key: string]: any } = {};
-  const wordCountByPerson: { [key: string]: any } = {};
+  const chatTimesByPerson: { [key: string]: { [key: string]: number } } = {};
+  const wordCountByPerson: { [key: string]: { [key: string]: number } } = {};
   contentArr.map((line: string) => {
     const timeString = line.substr(0, line.indexOf('-')).trim();
     const timeStamp = dayjs(timeString, 'DD/MM/YY, h:mm a');

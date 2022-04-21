@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import {forbiddenWords, colorArray} from '../config/common';
 
 const groupChatsByPerson = (contentArr: string[]) => {
-  const chatByPerson: { [key: string]: any } = {};
+  const chatByPerson: { [key: string]: string[] } = {};
   let prevName = '';
   contentArr.map((line) => {
     const timeString = line.substr(0, line.indexOf('-')).trim();
@@ -27,16 +27,16 @@ const groupChatsByPerson = (contentArr: string[]) => {
   return chatByPerson;
 };
 
-const countWordOccurrences = (chatByPerson: { [key: string]: any }) => {
-  const wordOccurrences: { [key: string]: any } = {};
+const countWordOccurrences = (chatByPerson: { [key: string]: string[] }) => {
+  const wordOccurrences: { [key: string]: { [key: string]: number } } = {};
   for (const person in chatByPerson) {
     wordOccurrences[person] = {};
     const lineArray = chatByPerson[person];
     lineArray.map((line: string) => {
       const wordArray = line
           .replace(/\./g, ' ')
-          .replace(/\,/g, ' ')
-          .replace(/\!/g, ' ')
+          .replace(/,/g, ' ')
+          .replace(/!/g, ' ')
           .replace(/\?/g, ' ')
           .split(' ');
 
@@ -60,10 +60,11 @@ const countWordOccurrences = (chatByPerson: { [key: string]: any }) => {
   return wordOccurrences;
 };
 
-const sortByOccurrence = (wordOccurrences: { [key: string]: any }) => {
-  const finalWordCount: { [key: string]: any } = {};
+const sortByOccurrence =
+(wordOccurrences: { [key: string]: { [key: string]: number } }) => {
+  const finalWordCount: { [key: string]: { [key: string]: number } } = {};
   for (const person in wordOccurrences) {
-    const sortedWordList: { [key: string]: any } = {};
+    const sortedWordList: { [key: string]: number } = {};
     const wordList = wordOccurrences[person];
     const sortedWordKeyList = Object.keys(wordList);
     sortedWordKeyList
@@ -78,8 +79,8 @@ const sortByOccurrence = (wordOccurrences: { [key: string]: any }) => {
   return finalWordCount;
 };
 
-const createWordCloud = (wordCount: { [key: string]: any }) => {
-  const customColors: { [key: string]: any } = {};
+const createWordCloud = (wordCount: { [key: string]: { [key: string]: number } }) => {
+  const customColors: { [key: string]: string } = {};
   const width = 4000;
   const height = 3000;
   const wordCanvas = createCanvas(width, height);
