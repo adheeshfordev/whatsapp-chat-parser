@@ -111,7 +111,7 @@ const createWordCloud = (wordCount: { [key: string]: { [key: string]: number } }
   fs.writeFileSync('./image.png', buffer);
 };
 
-const generateWordCloud = (contentArr: Array<any>) => {
+const generateWordCloud = (contentArr: string[]) => {
   const chatByPerson = groupChatsByPerson(contentArr);
   const wordOccurrences = countWordOccurrences(chatByPerson);
   const finalWordCount = sortByOccurrence(wordOccurrences);
