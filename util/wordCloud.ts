@@ -79,7 +79,8 @@ const sortByOccurrence =
   return finalWordCount;
 };
 
-const createWordCloud = (wordCount: { [key: string]: { [key: string]: number } }) => {
+const createWordCloud =
+(wordCount: { [key: string]: { [key: string]: number } }) => {
   const customColors: { [key: string]: string } = {};
   const width = 4000;
   const height = 3000;
