@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 const colorArray = [
   '#3366CC',
   '#DC3912',
@@ -26,6 +26,6 @@ const colorArray = [
 const forbiddenWords: string[] = [];
 
 const _colorArray = colorArray;
-export { _colorArray as colorArray };
+export {_colorArray as colorArray};
 const _forbiddenWords = forbiddenWords;
-export { _forbiddenWords as forbiddenWords };
+export {_forbiddenWords as forbiddenWords};

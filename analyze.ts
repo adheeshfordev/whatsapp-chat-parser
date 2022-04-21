@@ -1,10 +1,10 @@
-//@ts-check
+// @ts-check
 import * as fs from 'fs';
-import dayjs, { extend } from 'dayjs';
+import dayjs, {extend} from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 extend(customParseFormat);
 
-import { generateWordCloud } from './util/wordCloud';
+import {generateWordCloud} from './util/wordCloud';
 
 const fetchChatAnalysis = () => {
   const content = fs.readFileSync(process.argv[2]).toString();

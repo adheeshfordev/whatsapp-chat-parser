@@ -5,11 +5,13 @@
         "es2021": true
     },
     "extends": [
-        "google"
+        "google","eslint:recommended", "plugin:@typescript-eslint/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
     "rules": {
-    }
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"]
 }

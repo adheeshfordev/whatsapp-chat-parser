@@ -1,8 +1,8 @@
-//@ts-check
-import  * as fs from 'fs';
-import { createCanvas } from 'canvas';
+// @ts-check
+import * as fs from 'fs';
+import {createCanvas} from 'canvas';
 import dayjs from 'dayjs';
-import { forbiddenWords, colorArray } from '../config/common';
+import {forbiddenWords, colorArray} from '../config/common';
 
 const groupChatsByPerson = (contentArr: string[]) => {
   const chatByPerson: { [key: string]: any } = {};
@@ -118,4 +118,4 @@ const generateWordCloud = (contentArr: Array<any>) => {
 };
 
 const _generateWordCloud = generateWordCloud;
-export { _generateWordCloud as generateWordCloud };
+export {_generateWordCloud as generateWordCloud};
