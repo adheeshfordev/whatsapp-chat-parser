@@ -4,6 +4,8 @@ import {createCanvas} from 'canvas';
 import dayjs from 'dayjs';
 import {forbiddenWords, colorArray} from '../config/common';
 
+const mediaSubStr = '<MEDIA';
+
 const groupChatsByPerson = (contentArr: string[]) => {
   const chatByPerson: { [key: string]: string[] } = {};
   let prevName = '';
@@ -15,7 +17,7 @@ const groupChatsByPerson = (contentArr: string[]) => {
     if (!name || !hasTimeStampPrefix) {
       name = prevName;
     }
-    if (!line.toUpperCase().includes('<MEDIA')) {
+    if (!line.toUpperCase().includes(mediaSubStr)) {
       if (!chatByPerson[name]) {
         chatByPerson[name] = [line.substring(line.indexOf(':') + 1)];
       } else {
