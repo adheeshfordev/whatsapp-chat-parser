@@ -7,5 +7,3 @@ updates:
       time: "14:00"
       timezone: "Asia/Calcutta"
     open-pull-requests-limit: 20
-    reviewers:
-      - "adheeshfordev"
