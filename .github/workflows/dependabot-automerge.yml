@@ -7,9 +7,8 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The type os secret is ${{ secrets.TYPE_OF }}."
       - uses: actions/checkout@v2
       - uses: ahmadnassri/action-dependabot-auto-merge@v2
         with:
           target: major
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.REPO_TOKEN }}
