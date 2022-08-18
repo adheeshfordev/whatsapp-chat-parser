@@ -5,11 +5,9 @@ on:
 
 jobs:
   auto-merge:
-    permissions: write-all
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/github-script@v3
         with:
           github-token: ${{secrets.DEPENDABOT_AUTOMERGE_TOKEN}}
