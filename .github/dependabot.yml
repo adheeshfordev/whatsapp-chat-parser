@@ -2,9 +2,10 @@ version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
+    target-branch: "dependabot/npm"
     schedule:
       interval: "daily"
-      time: "11:00"
+      time: "22:15"
       timezone: "Asia/Calcutta"
     open-pull-requests-limit: 20
     reviewers:
