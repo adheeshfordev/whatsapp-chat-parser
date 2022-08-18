@@ -5,7 +5,7 @@ updates:
     target-branch: "test-branch"
     schedule:
       interval: "daily"
-      time: "22:15"
+      time: "11:00"
       timezone: "Asia/Calcutta"
     open-pull-requests-limit: 20
     reviewers:
