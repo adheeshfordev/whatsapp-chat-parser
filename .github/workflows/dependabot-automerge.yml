@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.REPO_TOKEN}}
+          github-token: ${{secrets.DEPENDABOT_AUTOMERGE_TOKEN}}
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,
