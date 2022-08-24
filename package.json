@@ -15,7 +15,7 @@
     "aws-sdk": "^2.1201.0"
   },
   "devDependencies": {
-    "@types/node": "^18.7.10",
+    "@types/node": "^18.7.11",
     "@typescript-eslint/eslint-plugin": "^5.34.0",
     "@typescript-eslint/parser": "^5.34.0",
     "eslint": "^8.22.0",
