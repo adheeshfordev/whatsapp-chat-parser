@@ -12,7 +12,7 @@
   "dependencies": {
     "canvas": "^2.9.3",
     "dayjs": "^1.11.5",
-    "aws-sdk": "^2.1202.0"
+    "aws-sdk": "^2.1203.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.13",
