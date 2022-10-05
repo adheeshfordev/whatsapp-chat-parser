@@ -11,8 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "canvas": "^2.9.3",
-    "dayjs": "^1.11.5",
-    "aws-sdk": "^2.1196.0"
+    "dayjs": "^1.11.5"
   },
   "devDependencies": {
     "@types/node": "^18.7.6",

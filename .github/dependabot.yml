@@ -7,6 +7,6 @@ updates:
       interval: "daily"
       time: "07:00"
       timezone: "Asia/Calcutta"
-    open-pull-requests-limit: 20
+    open-pull-requests-limit: 0
     reviewers:
       - "adheeshfordev"
