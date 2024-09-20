@@ -99,9 +99,10 @@ const createWordCloud =
     if (customColors[person]) {
       personalColor = customColors[person];
     }
+    console.log(wordCount);
 
     for (const word in wordCount[person]) {
-      const fontSize = wordCount[person][word] / 10;
+      const fontSize = Math.log(wordCount[person][word])*5;
       context.font = `bold ${fontSize}px Menlo`;
       context.fillStyle = personalColor;
       const x = Math.random() * 3600 + 200;
@@ -110,8 +111,13 @@ const createWordCloud =
     }
     count++;
   }
-  const buffer = wordCanvas.toBuffer('image/png');
-  fs.writeFileSync('./image.png', buffer);
+  try {
+    const buffer = wordCanvas.toBuffer('image/png');
+    
+    fs.writeFileSync('./image.png', new Uint8Array(buffer));
+  } catch (err) {
+    console.error('Error occurred while saving the image:', err);
+  }
 };
 
 const generateWordCloud = (contentArr: string[]) => {
